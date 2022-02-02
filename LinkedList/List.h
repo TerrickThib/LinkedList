@@ -1,5 +1,6 @@
 #pragma once
 #include "Iterator.h"
+#include <iostream>
 using namespace std;
 
 template <typename T>
@@ -111,8 +112,8 @@ template<typename T>
 inline void List<T>::pushBack(const T& value)
 {
 	Node<T>* newNode = new Node<T>(value); //Creates a new node with the value
-
-	newNode = m_last->next;
+	if(m_last != nullptr)
+		newNode = m_last->next;
 	m_last = newNode;
 	m_nodeCount++;
 }

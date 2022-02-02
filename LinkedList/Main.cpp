@@ -9,5 +9,6 @@ int main()
 
 	willwork.pushFront(3);
 	willwork.print();
+
 	return 0;
 }
