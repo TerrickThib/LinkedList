@@ -71,6 +71,12 @@ template<typename T>
 inline void List<T>::destroy()
 {
 
+	while(m_first != NULL)
+	{
+		Iterator<T>operator--;
+		m_first = next;
+	}
+	m_first = NULL;
 }
 
 template<typename T>
@@ -102,9 +108,12 @@ inline void List<T>::pushFront(const T& value)
 {
 	Node<T>* newNode = new Node<T>(value); //Creates a new node with the value
 
-	if (m_first != nullptr)
+	if (m_first != nullptr)//If first isnt null then new node is first previous
 		newNode = m_first->previous;
-	m_first = newNode;
+
+	if (m_first = nullptr)
+		newNode = m_first;
+
 	m_nodeCount++;
 }
 
@@ -112,7 +121,7 @@ template<typename T>
 inline void List<T>::pushBack(const T& value)
 {
 	Node<T>* newNode = new Node<T>(value); //Creates a new node with the value
-	if(m_last != nullptr)
+	if(m_last != nullptr)//If last isnt null the new node is last next
 		newNode = m_last->next;
 	m_last = newNode;
 	m_nodeCount++;
