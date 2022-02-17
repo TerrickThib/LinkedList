@@ -271,3 +271,27 @@ inline int List<T>::getLength() const
 {
 	return m_nodeCount;
 }
+
+template<typename T>
+inline const List<T>& List<T>::operator=(const List<T>& otherList)
+{
+	destroy(); ///gets ride of the list data 
+
+	//Creates a nod that is the same as the other list first
+	Node<T>* otherNode = otherList.m_first;
+
+	for (int i = 0; i < otherList.getLength(); i++)//Iterates through the other list 
+	{
+		insert(otherNode->getdata, i);//inserts data to the other node
+		otherNode = otherNode->next;
+	}
+
+	return *this;
+	
+}
+
+template<typename T>
+inline void List<T>::sort()
+{
+
+}
