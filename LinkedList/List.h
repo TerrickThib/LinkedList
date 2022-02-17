@@ -1,4 +1,5 @@
 #pragma once
+#include "Node.h"
 #include "Iterator.h"
 #include <iostream>
 using namespace std;
@@ -148,7 +149,40 @@ inline void List<T>::pushBack(const T& value)
 template<typename T>
 inline bool List<T>::insert(const T& value, int index)
 {
-	return false;
+	//Creates a new nodes
+	Node<T>* newNode = new Node<T>(value);
+	Node<T>* currentNode = new Node<T>();
+
+	//If the given index is below zero or greater than node count then it is out the list
+	if (index < 0 || index > m_nodeCount)
+		return false;
+
+	//If index is 0 or its is empty then pushfront the value
+	if (isEmpty() || index == 0)
+	{
+		pushFront(value);
+		return true;
+	}
+
+	//If index is equel to nodeCount then push the value to the back
+	else if (index == m_nodeCount)
+	{
+		pushBack(value);
+		return true;
+	}
+
+	currentNode = m_first;
+
+	for (int i = 0; i < index; i++)
+	{
+		currentNode = currentNode->next;//Set currentnode to be current nodes next
+	}
+
+	newNode->next = currentNode; //new nodes next is current node
+	newNode->previous = currentNode->previous; //new nodes previous is current nodes previous  
+	newNode->previous->next = newNode; //new nodes previous newxt is new node
+	currentNode->previous = newNode; // current nodes previous is new node
+	m_nodeCount++;
 }
 
 template<typename T>
@@ -173,10 +207,27 @@ inline void List<T>::initialize()
 }
 
 template<typename T>
+inline bool List<T>::isEmpty() const
+{
+	if (getLength() == 0)//If length is 0 return true
+	{
+		return true;
+	}
+	else
+		return false;
+}
+
+template<typename T>
 inline bool List<T>::getData(Iterator<T>& iter, int index)
 {
 	if (index& iter < 0 || index& iter >= getLength())
 		return T();
 
 	return m_nodeCount[index];
+}
+
+template<typename T>
+inline int List<T>::getLength() const
+{
+	return m_nodeCount;
 }

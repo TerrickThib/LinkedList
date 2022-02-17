@@ -10,6 +10,7 @@ int main()
 	willwork.pushFront(3);
 	willwork.pushFront(5);
 	willwork.pushBack(56);
+	willwork.insert(33, 2);
 	willwork.print();
 
 	return 0;
