@@ -9,6 +9,7 @@ int main()
 
 	willwork.pushFront(3);
 	willwork.pushFront(5);
+	willwork.pushBack(56);
 	willwork.print();
 
 	return 0;

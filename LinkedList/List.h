@@ -128,9 +128,20 @@ template<typename T>
 inline void List<T>::pushBack(const T& value)
 {
 	Node<T>* newNode = new Node<T>(value); //Creates a new node with the value
-	if(m_last != nullptr)//If last isnt null the new node is last next
-		newNode = m_last->next;
-	m_last = newNode;
+	
+	if (m_last != nullptr)//If last isnt null the new node is last next
+	{
+		m_last->next = newNode;//Sets last next to be newNode
+		newNode->previous = m_last;//Sets new nodes previous to be last
+	}
+
+	m_last = newNode;//Set newNode to be last
+		
+	if (m_first == nullptr)//If first is nullptr
+	{
+		m_first = newNode;//Then set first to be newnode
+	}
+	
 	m_nodeCount++;
 }
 
