@@ -109,10 +109,17 @@ inline void List<T>::pushFront(const T& value)
 	Node<T>* newNode = new Node<T>(value); //Creates a new node with the value
 
 	if (m_first != nullptr)//If first isnt null then new node is first previous
-		newNode = m_first->previous;
+	{
+		m_first->previous = newNode;//Sets firsts previous to be the new node
+		newNode->next = m_first;//Set the new node's next to be first node
+	}
 
-	if (m_first = nullptr)
-		newNode = m_first;
+	m_first = newNode; //Set newNode to be first
+
+	if (m_last == nullptr)//If last is nullprt 
+	{
+		m_last = newNode;//Then set last to be newNode
+	}
 
 	m_nodeCount++;
 }
