@@ -293,5 +293,19 @@ inline const List<T>& List<T>::operator=(const List<T>& otherList)
 template<typename T>
 inline void List<T>::sort()
 {
+	T key;
+	int j = 0;
 
+	for (int i = 1; i < getLength(); i++)
+	{
+		key = m_nodeCount[i]; //Sets key to current index
+		j = i - 1;//sets j to pervious index
+		while (j >= 0 && m_nodeCount[j] > key)//While j is greater than oe equal to o and the value at j is greater than key
+		{
+			m_nodeCount[j + 1] = m_nodeCount[j];//Set array at the index of j + 1 to be the value at index of j
+			j--;//Decrments
+		}
+
+		m_nodeCound[j + 1] = key;//Set array at the index of j+1 to be the key
+	}
 }
