@@ -11,6 +11,7 @@ int main()
 	willwork.pushFront(5);
 	willwork.pushBack(56);
 	willwork.insert(33, 2);
+	willwork.remove(5);
 	willwork.print();
 
 	return 0;

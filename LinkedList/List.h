@@ -38,7 +38,7 @@ public:
 
 	int getLength() const;  
 
-	const List<T>& operator = (const List<T>& otherList);
+	const List<T>& operator =(const List<T>& otherList);
 
 	void sort();
 
@@ -183,6 +183,46 @@ inline bool List<T>::insert(const T& value, int index)
 	newNode->previous->next = newNode; //new nodes previous newxt is new node
 	currentNode->previous = newNode; // current nodes previous is new node
 	m_nodeCount++;
+}
+
+template<typename T>
+inline bool List<T>::remove(const T& value)
+{
+	Node<T>* nodeTobeRemoved = new Node<T>;
+	nodeTobeRemoved = m_first;
+	
+	//Loops through the nodes and checks if the data matches the value 
+	for (int i = 0; i < getLength(); i++)
+	{
+		if (nodeTobeRemoved->data == value)//If node to be removed is equal to value
+		{
+			if (nodeTobeRemoved == m_first)//If the current node matches the first in the list
+			{
+				m_first = nodeTobeRemoved->next;//first is node to be removed next
+				m_first->previous = nullptr;//First previous is nullptr
+				delete nodeTobeRemoved;
+			}
+			else if (nodeTobeRemoved == m_last)//if the current node matches the last in the list
+			{
+				m_last = nodeTobeRemoved->previous;//Last is node to be removed previous
+				m_last->next = nullptr;//last next is nullptr
+				delete nodeTobeRemoved;
+			}
+			else
+			{
+				//Nodes to be removed previous next is its next
+				nodeTobeRemoved->previous->next = nodeTobeRemoved->next;
+				//Nodes next previous is nodes previous
+				nodeTobeRemoved->next->previous = nodeTobeRemoved->previous;
+				delete nodeTobeRemoved;
+			}
+			m_nodeCount--;
+			return true;
+		}
+		else  //If node to be removed is nodes next
+			nodeTobeRemoved = nodeTobeRemoved->next;
+	}
+	return false;
 }
 
 template<typename T>
