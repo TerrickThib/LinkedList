@@ -293,19 +293,23 @@ inline const List<T>& List<T>::operator=(const List<T>& otherList)
 template<typename T>
 inline void List<T>::sort()
 {
-	T key;
-	int j = 0;
+	Node<T>* tempNode = new Node<T>();
+	Node<T>* currentNode = new Node<T>();
 
-	for (int i = 1; i < getLength(); i++)
+	for (int i = 0; i < m_nodeCount - 1; i++)//Iterats through the length minus 1
 	{
-		key = m_nodeCount[i]; //Sets key to current index
-		j = i - 1;//sets j to pervious index
-		while (j >= 0 && m_nodeCount[j] > key)//While j is greater than oe equal to o and the value at j is greater than key
+		currentNode = m_first; 
+
+		for (int j = 0; j < m_nodeCount - i - 1; j++)//while i is less than the node count minus 1
 		{
-			m_nodeCount[j + 1] = m_nodeCount[j];//Set array at the index of j + 1 to be the value at index of j
-			j--;//Decrments
+			if (currentNode->data > currentNode->next->data)//If currentnode is equel to current nodes next
+			{
+				tempNode->data = currentNode->next->data;//temp equels current nodes next
+				currentNode->next->data = currentNode->data;//current nodes next is current node
+				currentNode->data = tempNode->data;//current node is equel to temp node
+			}
+			currentNode = currentNode->next;
 		}
 
-		m_nodeCound[j + 1] = key;//Set array at the index of j+1 to be the key
 	}
 }
