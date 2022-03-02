@@ -22,5 +22,17 @@ int main()
 	system("pause");
 	willwork.remove(5);
 	willwork.print();
-	return 0;
+	
+
+	system("pause");
+	List<int> betterwork = List<int>();
+
+	betterwork = willwork;
+	betterwork.print();
+
+	system("pause");
+	betterwork.destroy();
+	betterwork.pushFront(2);
+	betterwork.print();
+
 }

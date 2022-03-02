@@ -66,18 +66,23 @@ inline List<T>::List(const List<T>& other)
 template<typename T>
 inline List<T>::~List()
 {
+	destroy();
 }
 
 template<typename T>
 inline void List<T>::destroy()
 {
+	Node<T>* currentNode = m_first;
+	Node<T>* tempNode;
 
-	while(m_first != NULL)
+	for (int i = 0; i < getLength(); i++)
 	{
-		Iterator<T>operator--;
-		m_first = next;
+		tempNode = currentNode->next;
+		delete currentNode;
+		currentNode = tempNode;
 	}
-	m_first = NULL;
+
+	initialize();
 }
 
 template<typename T>
@@ -98,7 +103,7 @@ inline bool List<T>::contains(const T object) const
 	bool itemfound = false;
 	for (Iterator<T>iter = begin();iter != end(); iter++)//set iterator to begining of list and while not at the end of list iterarate through
 	{
-		if (iter = object)//if iterator = object return true other whise return false
+		if (*iter == object)//if iterator = object return true other whise return false
 			return true;
 		return false;
 	}
@@ -260,10 +265,19 @@ inline bool List<T>::isEmpty() const
 template<typename T>
 inline bool List<T>::getData(Iterator<T>& iter, int index)
 {
-	if (index& iter < 0 || index& iter >= getLength())
-		return T();
+	if (index < 0 || index > getLength())
+	{
+		return false;
+	}
 
-	return m_nodeCount[index];
+	iter = begin(); // sets the iterater to the beging
+
+	for (int i = 0; i < index; i++)
+	{
+		++iter;
+	}
+
+	return true;
 }
 
 template<typename T>
@@ -282,7 +296,7 @@ inline const List<T>& List<T>::operator=(const List<T>& otherList)
 
 	for (int i = 0; i < otherList.getLength(); i++)//Iterates through the other list 
 	{
-		insert(otherNode->getdata, i);//inserts data to the other node
+		insert(otherNode->data, i);//inserts data to the other node
 		otherNode = otherNode->next;
 	}
 

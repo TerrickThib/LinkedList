@@ -59,8 +59,9 @@ inline const bool Iterator<T>::operator==(const Iterator<T>& iter)
 template<typename T>
 inline const bool Iterator<T>::operator!=(const Iterator<T>& iter)
 {
-	if (Iterator(m_current) != iter);
-	return true;
+	if (Iterator(m_current) != iter)
+		return true;
+	return false;
 }
 
 template<typename T>
